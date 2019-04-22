@@ -1,6 +1,6 @@
 var project = {
-  projectId: '',
-  projectDept: 'aaa',
+  // projectId: '',
+  projectDept: 'webProject',
   projectDifficulty: ''
 };
 
