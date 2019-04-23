@@ -1,5 +1,5 @@
 class Manager {
-  management(day) {
+  constructor(day) {
     this.days = day; // день по счёту = общему кол-ву дней
     this.WebDept = new WebDept();
     this.MobileDept = new MobileDept();
