@@ -1,5 +1,4 @@
 class Manager {
-  // по идее, "на вход подается количество дней"
   management(day) {
     this.days = day; // день по счёту = общему кол-ву дней
     this.WebDept = new WebDept();
@@ -35,7 +34,11 @@ class Manager {
   }
 
   WebDeptManagement() {
-    // needUnits, unBusyUnits, addUnits, firedUnits, takeProject
+    this.WebDept.needUnits();
+    this.WebDept.unBusyUnits();
+    this.WebDept.addUnits();
+    this.WebDept.firedUnits();
+    this.WebDept.takeProject();
   }
 
   MobileDeptManagement() {
