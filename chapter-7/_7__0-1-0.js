@@ -5,6 +5,34 @@ const SPECIALIZATION_WEB = 'Web'
 const SPECIALIZATION_MOBILE = 'Mobile'
 const SPECIALIZATION_TEST = 'Test'
 
+
+class Provide {
+    constructor() {
+        
+    }
+
+    getRandom(min, max) {
+
+        addProjects() {
+
+            let countProjects = getRandom(0, 4);
+            let webProjects = getRandom(0, countProjects);
+            
+            for (let i = 0; i < webProjects; i++) {
+              this.WebDept.projects.push( new Project(TYPE_PROJECT_WEB, getRandom(1, 3)) );
+            }
+            for (let i = 0; i < countProjects - webProjects; i++) {
+              this.MobileDept.projects.push( new Project(TYPE_PROJECT_MOBILE, getRandom(1, 3)) );
+            }
+          }
+
+        
+        function getRandom(min, max) {
+            return Math.floor( Math.random() * (max - min + 1) ) + min;
+        }
+    }
+}
+
 class Manager {
     constructor() {
         
@@ -94,6 +122,8 @@ class Unit {
     constructor(unitType) {
         this.unitType = unitType;
         this.unitSkill = 0;
+        this.unitBusy = 0;
+        this.unitUnBusy = 0;
     }
 }
 
