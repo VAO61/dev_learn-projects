@@ -79,22 +79,16 @@ class Manager {
     let unit = this.webDept.getUnBusyUnit();
     if (unit) {
       this.webDept.firedUnit(unit);
-      // TODO: что-то вроде того должно быть
-      // this.firedUnits.push(unit);
     }
 
     unit = this.mobileDept.getUnBusyUnit();
     if (unit) {
       this.mobileDept.firedUnit(unit);
-      // TODO: что-то вроде того должно быть
-      // this.firedUnits.push(unit);
     }
 
     unit = this.testDept.getUnBusyUnit();
     if (unit) {
       this.testDept.firedUnit(unit);
-      // TODO: что-то вроде того должно быть
-      // this.firedUnits.push(unit);
     }
   }
 
@@ -148,35 +142,23 @@ class Manager {
     this.testDept.work();
 
     // увольняем лишних сотрудников
-    // TODO: еще нет, пока просто используем сслыку на объект
     let unit = this.webDept.getUnBusyUnit();
-    if (unit) {
-      // Можно проще с условием либо значение, либо undefined
+    if (unit !== undefined) {
       this.webDept.firedUnit(this.webDept.getUnBusyUnit());
       this.statisticFiredUnits++;
     }
 
     unit = this.mobileDept.getUnBusyUnit();
     if (unit !== undefined) {
-      // Более правильный вариант для более точной проверки
       this.mobileDept.firedUnit(this.mobileDept.getUnBusyUnit());
       this.statisticFiredUnits++;
     }
 
     unit = this.testDept.getUnBusyUnit();
-    if (typeof unit !== 'undefined') {
-      // Можно так
+    if (unit !== undefined) {
       this.testDept.firedUnit(this.testDept.getUnBusyUnit());
       this.statisticFiredUnits++;
     }
-
-    // TODO: undefined. Нужен счётчик уволенных сотрудников
-    // console.log(this.hiredUnits);
-
-    // TODO: пустые объекты
-    // console.log(
-    //   this.firedUnits.length + ' - this is ' + typeof this.firedUnits
-    // );
   }
 
   transferToTestDeptProjects() {
@@ -203,21 +185,6 @@ class Manager {
 
     this.doneProjects.push(...this.testDept.getDevDonProjectsTransfer());
   }
-
-  // this.days = day;
-
-  // cheaklog() {
-  //     while(this.days > 0) {
-  //       this.addProjects();
-  //       this.WebDeptManagement();
-  //       this.MobileDeptManagement();
-  //       this.TestDeptManagement();
-  //       this.days--;
-  //     }
-  //     // hiredUnits _log
-  //     // firedUnits _log
-  //     // doneProjects _log
-  //   }
 }
 
 class Department {
@@ -225,13 +192,9 @@ class Department {
     this.spec = spec;
     this.projects = [];
     this.units = [];
-    // this.unBusyUnits = 0;
     this.unBusyUnits = [];
     this.doneProjects = [];
   }
-
-  // webDept.doneProject.push(testDept.doneProject)
-  // testDept.doneProject.push(Manager.doneProject)
 
   addUnit(unit) {
     this.unBusyUnits.push(unit);
@@ -303,7 +266,6 @@ class Department {
     if (this.spec === SPECIALIZATION_MOBILE) {
       this.unBusyUnits.forEach((unit, index) => {
         this.projects.forEach(project => {
-          // project.difficulty
           const count = this.units.filter(function(item) {
             return item.project === project;
           }).length;
@@ -356,25 +318,6 @@ class Department {
     this.projects = this.projects.filter(function(project) {
       return project !== null;
     });
-
-    // 1. взять конкретный проект из полученного списка проектов и назначить сотрудника(-ов) на его исполнение
-    // 1.а. для webDept || testDept --> project.length == 1 --> 1 unBusyUnit
-
-    // 1.b для mobileDept --> project.difficulty == 1 --> 1 unBusyUnit
-    // 1.b для mobileDept --> project.difficulty == 2 --> 2 unBusyUnit
-    // 1.b для mobileDept --> project.difficulty == 3 --> 3 unBusyUnit
-    // (= ? getRandom(1, 3)) =)
-
-    // 2. заканчиваем проект (условия ?)
-
-    // 2.b. Для webDept || mobileDept
-    //      unit.project.progress++ = unit.skill++ =
-    //      devDoneProjects.push.(project)
-    //      projects.push(new Project(TYPE_PROJECT_TEST));
-
-    // 2.b. Для testDept
-    //      unit.project.progress++ = unit.skill++ =
-    //      doneProjects.push.(project)
   }
 }
 
@@ -400,6 +343,6 @@ class Unit {
 }
 
 const manager = new Manager();
-const incomingData = new IncomingData(manager, 20); // ментор докопается!!!
+const incomingData = new IncomingData(manager, 20);
 incomingData.start();
 incomingData.statistic();
